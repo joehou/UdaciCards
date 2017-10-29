@@ -1,0 +1,35 @@
+import React,{Component} from 'react'
+import {View,Text,FlatList} from 'react-native'
+import {connect} from 'react-redux'
+import {getDecks} from '../utils/api'
+import {receiveDecks} from "../actions/index";
+import DeckItem from './DeckItem'
+
+class DecksList extends Component {
+  componentDidMount() {
+    const {dispatch} = this.props
+    getDecks().then((decks)=>dispatch(receiveDecks(decks)))
+  }
+
+  render(){
+    return(
+      <View style={{alignItems:'center',justifyContent:'center',flex:1}}>
+        <Text>More</Text>
+        <Text>Amazeballs</Text>
+        <FlatList data={this.props.decks}
+                  renderItem={({item})=><DeckItem deck={item} navigation={this.props.navigation} />}
+                  keyExtractor={(item) => item.title}
+        />
+      </View>
+    )
+  }
+}
+
+function mapStateToProps (state) {
+  return {
+    decks: Object.values(state)
+  }
+
+}
+
+export default connect(mapStateToProps)(DecksList)
