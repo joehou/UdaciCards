@@ -1,4 +1,4 @@
-
+import {AsyncStorage} from 'react-native'
 export const CARDS_STORAGE_KEY = 'UdaciCards:cards'
 
 const initialData = {
@@ -27,5 +27,6 @@ const initialData = {
 }
 
 export function getDummyData(){
+  AsyncStorage.setItem(CARDS_STORAGE_KEY,JSON.stringify(initialData))
   return initialData
 }

@@ -10,31 +10,21 @@ class QuizView extends Component {
     showAnswer:false
   }
 
-  compo
-
   toggleQuestionAnswer(){
     this.setState({showAnswer:!this.state.showAnswer})
   };
 
   render(){
-    console.log(this.props.questionsCorrect)
-
     if (this.state.questionNumber+1>this.props.questionCount){
       return (
         <View>
           <Text>All done</Text>
-          <Text>Youve answered {this.props.questionsCorrect} for { (this.props.questionsCorrect*100)/this.props.questionCount}% </Text>
+          <Text>Youve answered {this.props.questionsCorrect} for correct out of {this.props.questionCount} for { (this.props.questionsCorrect*100)/this.props.questionCount}% </Text>
           <TouchableOpacity onPress={_=>{ this.props.resetQuizScore()
-                                          this.props.navigation.navigate(
-                                            'Quiz', {deckTitle: this.props.currentDeck.title}
-                                          )
-          }}>
+                                          this.props.navigation.navigate('Quiz', {deckTitle: this.props.currentDeck.title})}}>
             <Text>Restart Quiz</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={_=>{ this.props.navigation.navigate(
-                                            'Deck', {deckTitle: this.props.currentDeck.title}
-                                          )
-          }}>
+          <TouchableOpacity onPress={_=>{ this.props.navigation.goBack()}}>
             <Text>Back to Deck</Text>
           </TouchableOpacity>
         </View>
@@ -54,8 +44,7 @@ class QuizView extends Component {
         }}>
           <Text>Correct</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={_=>{ console.log("dummy")
-        }}>
+        <TouchableOpacity onPress={_=>{ this.setState({questionNumber:this.state.questionNumber+1})}}>
           <Text>Incorrect</Text>
         </TouchableOpacity>
       </View>

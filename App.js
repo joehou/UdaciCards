@@ -36,6 +36,7 @@ const MainNavigator= StackNavigator({
   AddCard: {
     screen: AddCardView,
     navigationOptions: {
+      title:"Add Card",
       headerTintColor: white,
       headerStyle: {
         backgroundColor: purple,
@@ -49,9 +50,7 @@ export default class App extends React.Component {
     return (
       <Provider store={createStore(combineReducers(reducers))}>
         <View style={styles.container}>
-          <Text>From App</Text>
           <MainNavigator/>
-          <Text>After n</Text>
         </View>
       </Provider>
     );
