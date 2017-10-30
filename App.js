@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import {createStore} from 'redux'
+import {createStore,combineReducers} from 'redux'
 import {Provider} from 'react-redux'
 import {StackNavigator} from 'react-navigation'
-import reducer from './reducers'
+import reducers from './reducers'
 import DecksList from './components/DecksList'
 import DeckView from './components/DeckView'
 import QuizView from './components/QuizView'
@@ -26,6 +26,7 @@ const MainNavigator= StackNavigator({
   Quiz: {
     screen: QuizView,
     navigationOptions: {
+      title:"quiz",
       headerTintColor: white,
       headerStyle: {
         backgroundColor: purple,
@@ -46,7 +47,7 @@ const MainNavigator= StackNavigator({
 export default class App extends React.Component {
   render() {
     return (
-      <Provider store={createStore(reducer)}>
+      <Provider store={createStore(combineReducers(reducers))}>
         <View style={styles.container}>
           <Text>From App</Text>
           <MainNavigator/>

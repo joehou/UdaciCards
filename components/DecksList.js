@@ -25,9 +25,9 @@ class DecksList extends Component {
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps ({decks}) {
   return {
-    decks: Object.values(state)
+    decks: Object.values(decks)
   }
 
 }

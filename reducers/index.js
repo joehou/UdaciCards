@@ -1,6 +1,6 @@
-import {RECEIVE_DECKS} from '../actions'
+import {RECEIVE_DECKS,ADD_QUIZ_SCORE,RESET_QUIZ_SCORE} from '../actions'
 
-export default function decks (state={},action){
+function decks (state={},action){
   switch(action.type){
     case RECEIVE_DECKS:
       return{
@@ -12,3 +12,21 @@ export default function decks (state={},action){
   }
 }
 
+function quiz(state={questionsCorrect:0},action){
+  switch(action.type){
+    case ADD_QUIZ_SCORE:
+      return{
+        ...state,
+        questionsCorrect: state.questionsCorrect+1
+      }
+    case RESET_QUIZ_SCORE:
+      return{
+        ...state,
+        questionsCorrect: 0
+      }
+    default:
+      return state
+  }
+}
+
+export default {decks,quiz}
