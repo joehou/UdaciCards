@@ -15,17 +15,17 @@ export function addCard(card) {
   return AsyncStorage.getItem(CARDS_STORAGE_KEY)
     .then(result =>{
       const decks =JSON.parse(result)
-      decks[card.deckTitle].questions=[...decks[card.deckTitle].questions,card.card]
+      decks[card.deckTitle].questions=[...decks[card.deckTitle].questions,card.question]
       AsyncStorage.setItem(CARDS_STORAGE_KEY,JSON.stringify(decks))
     })
 }
 
-export function addDeck(deck) {
-  console.log(deck)
+export function addDeck(Deck) {
+  console.log(Deck)
   return AsyncStorage.getItem(CARDS_STORAGE_KEY)
     .then(result => {
       let decks= JSON.parse(result)
-      decks = {...decks,...createEmptyDeck( deck)}
+      decks = {...decks,...createEmptyDeck( Deck)}
       AsyncStorage.setItem(CARDS_STORAGE_KEY,JSON.stringify(decks))
     })
 }
