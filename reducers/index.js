@@ -1,13 +1,20 @@
-import {RECEIVE_DECKS,ADD_QUIZ_SCORE,RESET_QUIZ_SCORE,ADD_CARD_TO_DECK} from '../actions'
+import {RECEIVE_DECKS,ADD_QUIZ_SCORE,RESET_QUIZ_SCORE,ADD_CARD_TO_DECK,ADD_NEW_DECK} from '../actions'
 
 function decks (state={},action){
   switch(action.type){
+    case ADD_NEW_DECK:
+      console.log('from reducers')
+      console.log(action.deck)
+      return {
+        ...state,
+        ...action.deck
+      }
     case ADD_CARD_TO_DECK:
       console.log(action)
       return {
         ...state,
         [action.card.deckTitle]: {...state[action.card.deckTitle],
-          questions: [...state.React.questions,action.card.question]
+          questions: [...state[action.card.deckTitle].questions,action.card.question]
         }
       }
     case RECEIVE_DECKS:

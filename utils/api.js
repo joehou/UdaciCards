@@ -1,5 +1,5 @@
 import {AsyncStorage} from 'react-native'
-import {getDummyData,CARDS_STORAGE_KEY} from "./helper"
+import {getDummyData,createEmptyDeck,CARDS_STORAGE_KEY} from "./helper"
 
 export function getDecks() {
   return AsyncStorage.getItem(CARDS_STORAGE_KEY)
@@ -15,8 +15,17 @@ export function addCard(card) {
   return AsyncStorage.getItem(CARDS_STORAGE_KEY)
     .then(result =>{
       const decks =JSON.parse(result)
-      decks.React.questions=[...decks.React.questions,card]
+      decks[card.deckTitle].questions=[...decks[card.deckTitle].questions,card.card]
       AsyncStorage.setItem(CARDS_STORAGE_KEY,JSON.stringify(decks))
     })
+}
 
+export function addDeck(deck) {
+  console.log(deck)
+  return AsyncStorage.getItem(CARDS_STORAGE_KEY)
+    .then(result => {
+      let decks= JSON.parse(result)
+      decks = {...decks,...createEmptyDeck( deck)}
+      AsyncStorage.setItem(CARDS_STORAGE_KEY,JSON.stringify(decks))
+    })
 }

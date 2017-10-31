@@ -26,7 +26,7 @@ class AddCardView extends Component {
         />
         <TouchableOpacity onPress={ ()=>{
           this.props.dispatch(addCardToDeck({deckTitle:this.props.navigation.state.params.deckTitle,question:this.state}))
-          addCard(this.state)
+          addCard({deckTitle:this.props.navigation.state.params.deckTitle,question:this.state})
           this.props.navigation.goBack()
         }}>
           <Text>Submit</Text>

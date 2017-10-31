@@ -30,3 +30,11 @@ export function getDummyData(){
   AsyncStorage.setItem(CARDS_STORAGE_KEY,JSON.stringify(initialData))
   return initialData
 }
+
+export function createEmptyDeck(deckName){
+  return { [deckName]: {
+      title: deckName,
+      questions: []
+    }
+  }
+}

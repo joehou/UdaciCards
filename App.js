@@ -2,17 +2,30 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {createStore,combineReducers} from 'redux'
 import {Provider} from 'react-redux'
-import {StackNavigator} from 'react-navigation'
+import {StackNavigator,TabNavigator} from 'react-navigation'
 import reducers from './reducers'
 import DecksList from './components/DecksList'
 import DeckView from './components/DeckView'
 import QuizView from './components/QuizView'
+import AddDeckView from './components/AddDeckView'
 import AddCardView from './components/AddCardView'
 import {white,purple} from './utils/colors'
 
+const Tabs = TabNavigator({
+  Decks: {
+    screen: DecksList
+  },
+  AddDeck: {
+    screen: AddDeckView,
+    navigationOptions:{
+      tabBarLabel: 'Add deck'
+    }
+  }
+})
+
 const MainNavigator= StackNavigator({
   Home: {
-    screen: DecksList
+    screen: Tabs
   },
   Deck: {
     screen: DeckView,
