@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View,StatusBar,Platform } from 'react-native';
 import {createStore,combineReducers} from 'redux'
 import {Provider} from 'react-redux'
 import {StackNavigator,TabNavigator} from 'react-navigation'
@@ -10,6 +10,15 @@ import QuizView from './components/QuizView'
 import AddDeckView from './components/AddDeckView'
 import AddCardView from './components/AddCardView'
 import {white,purple} from './utils/colors'
+import {Constants} from 'expo'
+
+function UdaciStatusBar ({backgroundColor,...props}){
+  return (
+    <View style={ {backgroundColor ,height: Constants.statusBarHeight}}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props}/>
+    </View>
+  )
+}
 
 const Tabs = TabNavigator({
   Decks: {
@@ -21,11 +30,26 @@ const Tabs = TabNavigator({
       tabBarLabel: 'Add deck'
     }
   }
+},{
+  tabBarOptions:{
+    activeTintColor: Platform.OS==="ios"?purple: white,
+    style: {
+      height: 56,
+      backgroundColor: Platform.OS==="ios"?white:purple,
+    }
+  }
 })
 
 const MainNavigator= StackNavigator({
   Home: {
-    screen: Tabs
+    screen: Tabs,
+    navigationOptions: {
+      title: 'UdaciCards',
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
   },
   Deck: {
     screen: DeckView,
@@ -62,7 +86,8 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(combineReducers(reducers))}>
-        <View style={styles.container}>
+        <View style={{flex:1}}>
+          <UdaciStatusBar backgroundColor ={purple} barStyle='light-content' />
           <MainNavigator/>
         </View>
       </Provider>
@@ -70,8 +95,3 @@ export default class App extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

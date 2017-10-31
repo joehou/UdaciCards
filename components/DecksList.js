@@ -13,9 +13,7 @@ class DecksList extends Component {
 
   render(){
     return(
-      <View style={{alignItems:'center',justifyContent:'center',flex:1}}>
-        <Text>More</Text>
-        <Text>Amazeballs</Text>
+      <View style={{flex:1}}>
         <FlatList data={this.props.decks}
                   renderItem={({item})=><DeckItem deck={item} navigation={this.props.navigation} />}
                   keyExtractor={(item) => item.title}
