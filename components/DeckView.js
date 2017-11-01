@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import * as actions from '../actions'
 import {white,purple,gray} from '../utils/colors'
 import {View,Text,TouchableOpacity,Platform,StyleSheet} from 'react-native'
+import {clearLocalNotification,setLocalNotification} from '../utils/helper'
 
 class DeckView extends Component{
   static navigationOptions = ({navigation})=>{
@@ -31,9 +32,12 @@ class DeckView extends Component{
           </TouchableOpacity>
           <TouchableOpacity
             style={ Platform.OS ==='ios'? styles.iosSubmitBtn: styles.androidSubmitBtn}
-            onPress={()=>{ this.props.resetQuizScore()
-            this.props.navigation.navigate(
-              'Quiz', {deckTitle: this.props.deck.title, questionNumber:0}
+            onPress={()=>{
+              this.props.resetQuizScore()
+              clearLocalNotification()
+                .then(setLocalNotification)
+              this.props.navigation.navigate(
+                'Quiz', {deckTitle: this.props.deck.title, questionNumber:0}
             )}}>
             <Text style={styles.submitBtnText}>Start Quiz</Text>
           </TouchableOpacity>

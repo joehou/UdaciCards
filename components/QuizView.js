@@ -4,6 +4,7 @@ import * as actions from '../actions'
 import {View,Text,TouchableOpacity,StyleSheet,Platform} from 'react-native'
 import {red,white,purple,gray} from '../utils/colors'
 
+
 class QuizView extends Component {
   state={
     questionNumber:0,

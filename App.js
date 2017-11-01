@@ -11,6 +11,7 @@ import AddDeckView from './components/AddDeckView'
 import AddCardView from './components/AddCardView'
 import {white,purple} from './utils/colors'
 import {Constants} from 'expo'
+import {setLocalNotification} from './utils/helper'
 
 function UdaciStatusBar ({backgroundColor,...props}){
   return (
@@ -83,6 +84,10 @@ const MainNavigator= StackNavigator({
 })
 
 export default class App extends React.Component {
+  componentDidMount(){
+    setLocalNotification()
+  }
+
   render() {
     return (
       <Provider store={createStore(combineReducers(reducers))}>
