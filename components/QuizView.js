@@ -30,7 +30,8 @@ class QuizView extends Component {
               <TouchableOpacity
                 style={ Platform.OS ==='ios'? styles.iosSubmitBtn: styles.androidSubmitBtn}
                 onPress={_=>{ this.props.resetQuizScore()
-                                              this.props.navigation.navigate('Quiz', {deckTitle: this.props.currentDeck.title})}}>
+                              this.setState({questionNumber:0})
+                }}>
                 <Text style={styles.submitBtnText}>Restart Quiz</Text>
               </TouchableOpacity>
               <TouchableOpacity

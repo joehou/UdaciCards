@@ -28,7 +28,9 @@ class AddDeckView extends Component{
             this.setState({deckTitle:""})
             this.props.dispatch(addNewDeck(this.state.deckTitle))
             addDeck(this.state.deckTitle)
-            this.props.navigation.goBack()
+            this.props.navigation.navigate(
+              'Deck',{deckTitle: this.state.deckTitle}
+              )
           }}>
           <Text style={styles.submitBtnText}>Submit</Text>
         </TouchableOpacity>
